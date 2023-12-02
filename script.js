@@ -3,11 +3,23 @@ ctx = canvas.getContext("2d");
 const toolsBtn = document.querySelectorAll(".tool");
 const fillColor  = document.querySelector("#fill-color");
 const sizeSlider = document.querySelector("#size-slider");
+const colorsBtns = document.querySelectorAll(".colors .option");
+const colorPicker = document.querySelector("#color-picker");
+const clearCanvas = document.querySelector(".clear-canvas");
+const saveImg = document.querySelector(".save-img");
+const setCanvasBackground = () => {
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = selectedColor ; //setting the fillStyle  back to selectedColor , it will be  the brush color 
+} 
+
+
 //gloabl variables with default values  
 let prevMouseX, prevMouseY;
 let isDrawing = false;
 brushwidth = 5 ;
 selectedTool = "brush";
+selectedColor ="#000";
 
 
 
@@ -15,6 +27,7 @@ window.addEventListener("load",()=>{
     //setting canvas width/height.. offsetwidth/height returns viewable  width/height of an element   
     canvas.width = canvas.offsetWidth ;
     canvas.height = canvas.offsetHeight;
+    setCanvasBackground();
 });
 
 const startDraw = (e)=>{
@@ -23,6 +36,8 @@ const startDraw = (e)=>{
      prevMouseY = e.offsetY;
      ctx.beginPath(); //creating a new path to draw
      ctx.lineWidth = brushwidth;
+     ctx.strokeStyle = selectedColor;
+     ctx.fillStyle = selectedColor;
      snapshot = ctx.getImageData(0,0,canvas.width,canvas.height);
      //copying the canvas  data and  passing as snapshot value 
     //  this avoid dragging the image 
@@ -65,7 +80,8 @@ const stopDraw = () =>{
 const drawing = (e) => {
     if(!isDrawing) return ; // if isDrawing is true return from here 
     ctx.putImageData(snapshot,0,0); //adding copied canvas data on to the canvas
-    if(selectedTool==="brush"){
+    if (selectedTool === "brush" || selectedTool === "eraser"){
+        ctx.strokeStyle= selectedTool === "eraser"? "#fff" :selectedColor;
         ctx.lineTo(e.offsetX,e.offsetY);
        //  offsetX and offsetY returns x and y coordinate of the mouse pointer 
        ctx.stroke(); //drawing/filing line with color 
@@ -87,10 +103,31 @@ toolsBtn.forEach(btn => {
         document.querySelector(".options .active").classList.remove("active");
         btn.classList.add("active");
         selectedTool=btn.id;
-        console.log(selectedTool);
+
     })
 } );
+colorsBtns.forEach(btn => {
+    btn.addEventListener("click",()=>{
+        document.querySelector(".options .selected").classList.remove("selected");
+        btn.classList.add("selected");
+        selectedColor= window.getComputedStyle(btn).getPropertyValue("background-color");
+    });
+});
 
+saveImg.addEventListener("click",()=>{
+    const link = document.createElement("a");
+    link.download = `${Date.now()}.jpg`; //passing the current date as link download value 
+    link.href = canvas.toDataURL();// passing canvasData  as link href value 
+    link.click(); //clicking link to download image 
+})
+colorPicker.addEventListener("change",()=>{
+    colorPicker.parentElement.style.background = colorPicker.value;
+    colorPicker.parentElement.click()
+})
+clearCanvas.addEventListener("click",()=> {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    setCanvasBackground();
+})
 sizeSlider.addEventListener("change",()=> brushwidth = sizeSlider.value);
 canvas.addEventListener("mousedown",startDraw); 
 canvas.addEventListener("mousemove",drawing);   
