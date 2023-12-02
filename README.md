@@ -24,7 +24,7 @@ This project is a web-based paint application built using HTML, CSS, and JavaScr
 
 ## Demo
 
-To see the Paint App in action, [click here](#) to view the live demo.
+To see the Paint App in action, [click here](https://codewarnab.github.io/paint-web-app/) to view the live demo.
 
 ## Usage
 
@@ -53,6 +53,3 @@ We encourage contributors to propose and implement new features for the Paint Ap
 
 Feel free to propose any feature that could improve the application!
 
-## Deployment
-
-The application is deployed using GitHub Pages. You can access it [here](#).
