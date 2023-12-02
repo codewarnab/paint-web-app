@@ -43,13 +43,6 @@ Contributions are welcome! If you want to contribute to this project, follow the
 4. Push to the branch (`git push origin feature/your-idea`).
 5. Create a new Pull Request.
 
-### Feature Suggestions
-
-We encourage contributors to propose and implement new features for the Paint App. Some potential ideas include:
-- Adding a custom shape drawing tool
-- Implementing an undo/redo functionality
-- Enhancing the color palette with more options
-- Adding keyboard shortcuts for tools
 
 Feel free to propose any feature that could improve the application!
 
