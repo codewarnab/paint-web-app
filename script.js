@@ -17,9 +17,9 @@ const setCanvasBackground = () => {
 //gloabl variables with default values  
 let prevMouseX, prevMouseY;
 let isDrawing = false;
-brushwidth = 5 ;
-selectedTool = "brush";
-selectedColor ="#000";
+let brushwidth = 5 ;
+let selectedTool = "brush";
+let selectedColor ="#000";
 
 
 
@@ -132,3 +132,30 @@ sizeSlider.addEventListener("change",()=> brushwidth = sizeSlider.value);
 canvas.addEventListener("mousedown",startDraw); 
 canvas.addEventListener("mousemove",drawing);   
 canvas.addEventListener("mouseup", stopDraw);   
+
+window.addEventListener("keydown", (e) => {
+    console.log(toolsBtn)
+    console.log(e)
+    let key = e.key
+    switch(key) {
+        case "1":
+            toolsBtn[0].click()
+            break
+        case "2":
+            toolsBtn[1].click()
+            break        
+        case "3":
+            toolsBtn[2].click()
+            break        
+        case "f":
+            fillColor.click()
+            break
+        case "b":
+            toolsBtn[3].click()
+            break        
+        case "e":
+            toolsBtn[4].click()
+            break
+    }
+    if (e.altKey && key === "c") clearCanvas.click()
+})
