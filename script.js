@@ -20,7 +20,7 @@ let isDrawing = false;
 let brushwidth = 5 ;
 let selectedTool = "brush";
 let selectedColor ="#000";
-
+let count = 0
 
 
 window.addEventListener("load",()=>{
@@ -134,7 +134,6 @@ canvas.addEventListener("mousemove",drawing);
 canvas.addEventListener("mouseup", stopDraw);   
 
 window.addEventListener("keydown", (e) => {
-    console.log(toolsBtn)
     console.log(e)
     let key = e.key
     switch(key) {
@@ -155,6 +154,14 @@ window.addEventListener("keydown", (e) => {
             break        
         case "e":
             toolsBtn[4].click()
+            break
+        case "c":
+            count %= 4
+            if (count == 0) colorsBtns[0].click()
+            if (count == 1) colorsBtns[1].click()
+            if (count == 2) colorsBtns[2].click()
+            if (count == 3) colorsBtns[3].click()
+            count++
             break
     }
     if (e.altKey && key === "c") clearCanvas.click()
