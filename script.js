@@ -156,6 +156,7 @@ window.addEventListener("keydown", (e) => {
             toolsBtn[4].click()
             break
         case "c":
+            if (e.altKey) break
             count %= 4
             if (count == 0) colorsBtns[0].click()
             if (count == 1) colorsBtns[1].click()
