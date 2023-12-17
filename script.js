@@ -14,7 +14,7 @@ const setCanvasBackground = () => {
 } 
 
 
-//gloabl variables with default values  
+//global variables with default values  
 let prevMouseX, prevMouseY;
 let isDrawing = false;
 let brushwidth = 5 ;
@@ -134,7 +134,6 @@ canvas.addEventListener("mousemove",drawing);
 canvas.addEventListener("mouseup", stopDraw);   
 
 window.addEventListener("keydown", (e) => {
-    console.log(e)
     let key = e.key
     switch(key) {
         case "1":
